@@ -29,6 +29,9 @@ export class User extends EntityHelper {
   @Column({ nullable: true })
   password: string;
 
+  @Column({ unique: true })
+  phone: string;
+
   public previousPassword: string;
 
   @AfterLoad()

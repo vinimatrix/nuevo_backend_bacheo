@@ -19,6 +19,8 @@ import { AuthResetPasswordDto } from './dto/auth-reset-password.dto';
 import { AuthUpdateDto } from './dto/auth-update.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthRegisterLoginDto } from './dto/auth-register-login.dto';
+import { AuthService2 } from './auth.service2';
+import { AuthRegisterLoginPhoneDto } from './dto/auth-register-phone.dto';
 
 @ApiTags('Auth')
 @Controller({
@@ -26,23 +28,23 @@ import { AuthRegisterLoginDto } from './dto/auth-register-login.dto';
   version: '1',
 })
 export class AuthController {
-  constructor(public service: AuthService) {}
+  constructor(public service: AuthService2) {}
 
   @Post('email/login')
   @HttpCode(HttpStatus.OK)
-  public async login(@Body() loginDto: AuthEmailLoginDto) {
+  public async login(@Body() loginDto: AuthRegisterLoginPhoneDto) {
     return this.service.validateLogin(loginDto, false);
   }
 
   @Post('admin/email/login')
   @HttpCode(HttpStatus.OK)
-  public async adminLogin(@Body() loginDTO: AuthEmailLoginDto) {
+  public async adminLogin(@Body() loginDTO: AuthRegisterLoginPhoneDto) {
     return this.service.validateLogin(loginDTO, true);
   }
 
   @Post('email/register')
   @HttpCode(HttpStatus.CREATED)
-  async register(@Body() createUserDto: AuthRegisterLoginDto) {
+  async register(@Body() createUserDto: AuthRegisterLoginPhoneDto) {
     return this.service.register(createUserDto);
   }
 
